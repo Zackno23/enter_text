@@ -13,6 +13,7 @@ screen_h = screen.get_height()
 # 背景画面
 bg_img = pygame.image.load("img/minecraft_img.jpeg")
 title_img = pygame.image.load("img/MINECRAFT-TYPING.png")
+
 # BGM
 pygame.mixer.init(frequency=44100)
 pygame.mixer.music.load("sound/Moog City 2.mp3")
@@ -35,18 +36,22 @@ special_chars = {
 with open("command.txt", 'r', encoding='UTF-8') as f:
     command_list = random.sample(list(csv.reader(f)), 5)
 
-
 # font
 answer_font = pygame.font.Font(None, 30)
-answer_text = answer_font.render("enter command here", True, (0, 0, 0))
 command_font = pygame.font.Font(None, 40)
 command_info_font = pygame.font.Font("HannariMincho-Regular.otf", 40)
+
+answer_text = answer_font.render("enter command here", True, (0, 0, 0))
 
 command = ""
 command_info = ""
 score = 100
 
 moji = list("Enter space to start")
+
+start_typing = False
+capital_letter = False
+running = True
 
 
 def judge_key(key, capital, score):
@@ -69,11 +74,6 @@ def judge_key(key, capital, score):
     return "".join(moji), score
 
 
-start_typing = False
-capital_letter = False
-running = True
-question_number = 0
-
 while running:
     screen.blit(bg_img, (0, 0))
     screen.blit(title_img, (screen_w / 2 - title_img.get_width() / 2, 100))
@@ -89,24 +89,28 @@ while running:
                               screen_h / 2 + command_text.get_height() + command_info_text.get_height()))
 
     for event in pygame.event.get():
+        # 終了処理
         if event.type == QUIT:
             running = False
             sys.exit()
+
         if event.type == KEYDOWN:
             if not start_typing:
+                # 最初にスペースキーを押したとき
                 if event.key == K_SPACE:
                     start_typing = True
-                    command = command_list[question_number][0]
-                    command_info = command_list[question_number][1]
+                    command = command_list[0][0]
+                    command_info = command_list[0][1]
                     moji.clear()
                 continue
+            # シフトキーを押す→大文字の処理
             if pygame.key.get_pressed()[K_LSHIFT]:
                 capital_letter = True
             answer, score = judge_key(event.key, capital_letter, score)
             answer_text = answer_font.render(answer, True, (255, 0, 0))
             capital_letter = False
             if "".join(moji) == command:
-                command_list.pop(question_number)
+                command_list.pop(0)
 
                 if not command_list:
                     command = "game set"
@@ -114,8 +118,8 @@ while running:
                     start_typing = False
 
                 else:
-                    command = command_list[question_number][0]
-                    command_info = command_list[question_number][1]
+                    command = command_list[0][0]
+                    command_info = command_list[0][1]
                 moji.clear()
     # 画面を更新
     pygame.display.update()
