@@ -8,7 +8,6 @@
 /weather rain, 天気を雨にする
 /weather thunder, 天気を雷雨にする
 /locate endcity, 一番近いエンドシティの座標を知る
-/locate , 一番近いエンドシティの座標を知る
 /locate endcity, 一番近いエンドシティの座標を知る
 /locate endcity, 一番近いエンドシティの座標を知る
 /locate village, 一番近い村の座標を知る

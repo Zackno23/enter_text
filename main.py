@@ -32,7 +32,7 @@ special_chars = {
     '9': '(',
 }
 
-with open("command.txt", 'r') as f:
+with open("command.txt", 'r', encoding='UTF-8') as f:
     reader = csv.reader(f)
     command_list = list(reader)
 
