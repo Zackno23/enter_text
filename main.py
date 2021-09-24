@@ -33,8 +33,8 @@ special_chars = {
 }
 
 with open("command.txt", 'r', encoding='UTF-8') as f:
-    reader = csv.reader(f)
-    command_list = list(reader)
+    command_list = random.sample(list(csv.reader(f)), 5)
+
 
 # font
 answer_font = pygame.font.Font(None, 30)
@@ -62,9 +62,7 @@ def judge_key(key, capital, score):
         if char == command[len(moji)]:
             moji.append(char)
         else:
-            print("a")
             score -= 1
-            print(score)
 
     if key == K_SPACE and command[len(moji)] == " ":
         moji.append(" ")
@@ -98,30 +96,26 @@ while running:
             if not start_typing:
                 if event.key == K_SPACE:
                     start_typing = True
-                    question_number = random.randrange(len(command_list))
                     command = command_list[question_number][0]
                     command_info = command_list[question_number][1]
                     moji.clear()
                 continue
             if pygame.key.get_pressed()[K_LSHIFT]:
                 capital_letter = True
-            print(score)
             answer, score = judge_key(event.key, capital_letter, score)
             answer_text = answer_font.render(answer, True, (255, 0, 0))
             capital_letter = False
             if "".join(moji) == command:
                 command_list.pop(question_number)
-                print(command_list)
+
                 if not command_list:
                     command = "game set"
                     command_info = f'スコアは{score}点です！'
                     start_typing = False
-                    print("finished")
 
                 else:
-                    question_number = random.randrange(len(command_list))
                     command = command_list[question_number][0]
                     command_info = command_list[question_number][1]
                 moji.clear()
-
+    # 画面を更新
     pygame.display.update()
