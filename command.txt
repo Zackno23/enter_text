@@ -1,0 +1,22 @@
+/time set morning, 時間を朝にする
+/time set noon, 時間を昼にする
+/time set night, 時間を夜にする
+/alwaysday true, ずーっと昼にする
+/tp 1000 100 1500, x座標1000 ｙ座標100 ｚ座標1500にワープ
+/setworldspawn 2000 50 1700, リスポーン位置をx座標2000 ｙ座標50, ｚ座標1700にする
+/weather clear, 天気を晴れにする
+/weather rain, 天気を雨にする
+/weather thunder, 天気を雷雨にする
+/locate endcity, 一番近いエンドシティの座標を知る
+/locate , 一番近いエンドシティの座標を知る
+/locate endcity, 一番近いエンドシティの座標を知る
+/locate endcity, 一番近いエンドシティの座標を知る
+/locate village, 一番近い村の座標を知る
+/locate mansion, 一番近い洋館の座標を知る
+/gamerule doDaylightCycle false, 時間を動かす
+/gamerule doDaylightCycle true, 時間を止める
+/difficulty easy, イージーに変更
+/difficulty normal, ノーマルに変更
+/difficulty hard, ハードに変更
+/give @a diamond, 全員にダイヤモンドをあげる
+/give @a glass, 全員にガラスをあげる
